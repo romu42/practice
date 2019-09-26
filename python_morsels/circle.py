@@ -20,7 +20,7 @@ class Circle:
             raise ValueError("Radius cannot be negative")
         self._radius = int(radius)
         self._diameter = self._radius * 2
-        self._area = math.pi * (self._radius) * float(self._radius)
+        self._area = math.pi * float(self._radius) * float(self._radius)
 
     @property
     def diameter(self):
