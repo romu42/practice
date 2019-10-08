@@ -18,11 +18,9 @@ def main():
     indelimiter = args.indelimiter
     inquote = args.inquote
 
-    csv.register_dialect("indelimiter", delimiter=indelimiter)
-
     lines = []
     with open(inputfile, mode="rt") as file_to_fix:
-        reader = csv.reader(file_to_fix, dialect="indelimiter", quoting=csv.QUOTE_NONE, quotechar=inquote)
+        reader = csv.reader(file_to_fix, delimiter=indelimiter, quotechar=inquote)
         for row in reader:
             lines.append(row)
 
@@ -52,7 +50,7 @@ def get_args():
         default="|",
     )
     parser.add_argument(
-        "--in-quote", help="input quote", type=str, dest="inquote", default="'"
+        "--in-quote", help="input quote", type=str, dest="inquote", default='"'
     )
     args = parser.parse_args()
     return args
