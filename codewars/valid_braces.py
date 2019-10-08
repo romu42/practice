@@ -3,17 +3,26 @@
 
 
 def validBraces(string: str) -> bool:
-    d = dict((k, v) for k, v in ['('')', '['']', '{''}'])
-    vb = True
     if len(string) % 2 != 0:
         return False
-
     brace_list = list(string)
-    # check if the first to elements are a pair
-    if d[brace_list[0]] == brace_list[1]:
-        validBraces(''.join(brace_list[2:]))
+    if len(checkBraces(brace_list)) > 0:
+        return False
+    else:
+        return True
 
-    elif
+def checkBraces(_brace_list: list) -> list:
+    d = dict((k, v) for k, v in ['('')', '['']', '{''}'])
+# check if the first to elements are a pair
+    if len(_brace_list) == 2 and d[_brace_list[0]] == _brace_list[1]:
+        return []
+
+    elif d[_brace_list[0]] == _brace_list[1]:
+        return checkBraces(_brace_list[2:])
+
+    else:
+        return [_brace_list[0], checkBraces(_brace_list[1:])]
+
 
 
 # def validBraces(string: str) -> bool:
@@ -52,6 +61,7 @@ def validBraces(string: str) -> bool:
 
 
 if __name__ == "__main__":
-    print(validBraces("()"))
+    # print(validBraces("()"))
+    # print(validBraces("()[]"))
     print(validBraces("[(])"))
     print(validBraces("[({})](]"))
