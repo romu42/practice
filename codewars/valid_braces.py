@@ -6,10 +6,12 @@ def validBraces(string: str) -> bool:
     if len(string) % 2 != 0:
         return False
     brace_list = list(string)
-    if len(checkBraces(brace_list)) > 0:
-        return False
-    else:
-        return True
+    out = (checkBraces(brace_list))
+    # if len(checkBraces(brace_list)) > 0:
+    return(print)
+        # return False
+    # else:
+    #     return True
 
 def checkBraces(_brace_list: list) -> list:
     d = dict((k, v) for k, v in ['('')', '['']', '{''}'])
