@@ -2,6 +2,7 @@
 # by rog
 
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 
 # result = requests.get('https://codechalleng.es/100days/4829')
@@ -17,12 +18,7 @@ src = result.content
 
 # soup = BeautifulSoup(src, features="html.parser")
 soup = BeautifulSoup(src, 'lxml')
-links = soup.find_all("a")
 
-# print(links)
-# # print("\n")
-#
-for link in links:
-    # print(link)
-    if "/bites/" in link:
-        print(link.attrs['href'])
+for tr in soup.find_all('tr')[1:]:
+    tds = tr.find_all('td')
+    print(tds[0].contents[1].attrs['href'])
