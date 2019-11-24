@@ -21,5 +21,22 @@ def check_equality(list1, list2):
        - return SAME_UNORDERED_DEDUPED if they have the same unordered content
          and reduced to unique items
        - return NO_EQUALITY if none of the previous cases match"""
-    if list1 == list2:
-        return Equality(3)
+    if list1 is list2:
+        return Equality.SAME_REFERENCE
+
+    elif list1 == list2:
+        return Equality.SAME_ORDERED
+
+    elif sorted(list1) == sorted(list2):
+        return Equality.SAME_UNORDERED
+
+    elif set(list1) == set(list2):
+        return Equality.SAME_UNORDERED_DEDUPED
+
+    else:
+        return Equality.NO_EQUALITY
+
+
+
+if __name__ == '__main__':
+    print(Equality.SAME_REFERENCE)
