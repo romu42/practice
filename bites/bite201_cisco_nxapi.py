@@ -8,35 +8,22 @@ import json
 from requests.auth import HTTPBasicAuth
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
+from pprint import pprint
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def nxapi_show_version():
-    s = requests.Session()
-    url = "https://sbx-nxos-mgmt.cisco.com/"
+    url = "https://sbx-nxos-mgmt.cisco.com/ins"
     switchuser = "admin"
     switchpassword = "Admin_1234!"
-    # s.post(url, data={'username': switchuser, 'password': switchpassword}, verify=False)
-    response = s.get(url, auth=HTTPBasicAuth(switchuser, switchpassword), verify=False)
-    print(response)
-    http_headers = {"content-type": "application/json"}
-    payload = [
-        {
-            "ins_api": {
-                "version": "1.0",
-                "type": "cli_show",
-                "chunk": "0",
-                "sid": "1",
-                "input": "show version",
-                "output_format": "json",
-            }
-        }
-    ]
+    http_headers = {'content-type':'application/json-rpc'}
+    payload = [{"jsonrpc": "2.0",
+                "method": "cli",
+                "params": {"cmd": "show version",
+                           "version": 1}, "id": 1}]
+    data = json.dumps(payload)
+    response = requests.post(url, data=data, headers=http_headers, auth=(switchuser, switchpassword), verify=False)
 
-    # 1. use requests to post to the switch
-    response = s.post(url, json=json.dumps(payload), headers=http_headers, verify=False)
-    print(response)
 
     # 2. retrieve and return the kickstart_ver_str from the response
     # example response json:
@@ -47,7 +34,7 @@ def nxapi_show_version():
     #                      }
     #             }
     # }
-    # version = ...
+    version = response.json()['result']['body']['kickstart_ver_str']
     return version
 
 
