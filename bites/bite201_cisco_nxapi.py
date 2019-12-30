@@ -28,7 +28,7 @@ def nxapi_show_version():
                 "type": "cli_show",
                 "chunk": "0",
                 "sid": "1",
-                "input": "show version",
+                "input": show version",
                 "output_format": "json",
             }
         }
