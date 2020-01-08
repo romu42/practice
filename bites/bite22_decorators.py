@@ -6,13 +6,13 @@ from functools import wraps
 
 
 def make_html(element):
-    def real_decorator(function):
-        @wraps(function)
-    def wrapped(*args, **kwargs):
-       print(f"<{element}>") 
-       element(*args, **kwargs)
-       print(f"</{element}>")
-    return wrapped
+    def middle(func):
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return f"<{element}>{result}</{element}>"
+        return wrapper
+    return middle
+
 
 
     
