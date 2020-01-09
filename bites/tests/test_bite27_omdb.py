@@ -44,8 +44,6 @@ def test_len_movie_data(movies):
 
 def test_type_of_movie_elements(movies):
     assert all(type(m) == dict for m in movies)
-    for movie_dict in movies:
-        print(movie_dict)
 
 
 @pytest.mark.parametrize("func, expected", [
