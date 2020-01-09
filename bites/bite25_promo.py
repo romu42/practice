@@ -32,7 +32,23 @@ class Promo:
         self.bites_done = bites_done
 
     def _pick_random_bite(self):
-        pass
+        """ 
+        pick random BITES that is not in bites_done
+            if no bites available raise NoBitesAvailable
+        """
+        if len(BITES) == len(self.bites_done):
+            raise NoBitesAvailable
+        else:
+            bites = [bite for bite in BITES.keys() if bite not in self.bites_done]
+            bite = random.choice(bites)
+            return bite
+
 
     def new_bite(self):
-        pass
+        """
+        get a bite and update bites_done
+        """
+        bite = self._pick_random_bite()
+        self.bites_done.add(bite)
+        return bite
+
