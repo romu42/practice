@@ -21,19 +21,14 @@ Book = namedtuple('Book', 'title description image link')
 def get_book():
     """make a Soup object, parse the relevant html sections, and return a Book namedtuple"""
     soup = Soup(CONTENT, 'lxml')
-    # works for title
     divs = soup.find('div', class_='dotd-title')
-    #print(title.text.strip())
     title = (divs.text.strip())
     next = divs.next_sibling
     next = next.next_sibling
     next = next.next_sibling
-    #print(next.next_sibling.text.strip())
     description = (next.next_sibling.text.strip())
     divs = soup.find('div', class_='dotd-main-book-image float-left')
-    #print((image.contents[1].contents[1].contents[0].attrs['src']))
     image = ((divs.contents[1].contents[1].contents[0].attrs['src']))
-    #print((image.contents[1].attrs['href']))
     link = ((divs.contents[1].attrs['href']))
     return Book(title, description, image, link)
 
