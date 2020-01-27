@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-# https://codechalleng.es/bites/62/
-
 from string import ascii_lowercase
 
-from performance import (contains, contains_fast,
+from bites.bite62_performance import (contains, contains_fast,
                          ordered_list_max, ordered_list_max_fast,
                          list_concat, list_concat_fast,
                          list_inserts, list_inserts_fast,
